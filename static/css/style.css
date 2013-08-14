@@ -1,0 +1,250 @@
+	<style>
+		.ui-progressbar {
+			position: relative;
+		 }
+		
+		.progress-label {
+			position: absolute;
+			left: 10%(percent)s;
+			top: 4px;
+			font-weight: bold;
+			text-shadow: 1px 1px 0 #fff;
+		}
+		.progress-label2 {
+			position: absolute;
+			left: 10%(percent)s;
+			top: 4px;
+			font-weight: bold;
+			text-shadow: 1px 1px 0 #fff;
+		}
+		.progress-label3 {
+			position: absolute;
+			left: 10%(percent)s;
+			top: 4px;
+			font-weight: bold;
+			text-shadow: 1px 1px 0 #fff;
+		}
+		.progress-label4 {
+			position: absolute;
+			left: 10%(percent)s;
+			top: 4px;
+			font-weight: bold;
+			text-shadow: 1px 1px 0 #fff;
+		}
+body {
+   font-family:Arial,sans-serif;
+ }
+
+  
+ header {
+   background-color:blue;
+   background-image: url(/img/gertboard.jpg);
+   width:960px; 
+   height:120px;
+   float:top;
+
+ }
+
+ header h1 { 
+  text-color:#2C5463;
+  text-vertical-align:top;
+  text-line-height:20px;
+  }
+
+
+ aside {
+   background-color:Gainsboro;
+ }
+
+ footer {
+   background-color:#2C5463; 
+   color:#FFFFFF;
+   font-size:0.5em;
+   
+   background-image: url(../img/blue_fade.png); 
+   height:230px;    
+   clear:both;  
+   
+   background-image: -webkit-linear-gradient(top, #2c5463, #162b33);
+   background-image:    -moz-linear-gradient(top, white, gray);
+   background-image:     -ms-linear-gradient(top, #2c5463, #162b33);
+   background-image:      -o-linear-gradient(top, #2c5463, #162b33);   
+ } 
+
+/* Removed section#main from this set of selectors */
+aside, footer { 
+   padding:10px;
+ }
+ 
+ div#container {
+   width:960px;
+   margin:auto;
+   margin-top:10px;
+   border:3px solid #4B4B4B; 
+   border-radius: 20px; 
+   overflow:hidden; 
+ }
+
+ section#main {
+   width:400px; 
+   float:left;
+   padding-left:25px; 
+   padding-right:25px;
+   padding-bottom:20px; 
+
+ }
+ 
+/* Specify fonts for section H1s and article Ps */
+ section#main article h1 {
+   font-family:Kreon,serif;
+   font-size:2.6em;
+   margin-bottom:20px;
+   margin-top:20px;
+ }
+
+ section#main article p {
+   font-family:Tahoma;
+   font-size:1.2em;
+   letter-spacing:1.25px;
+   line-height:1.25em;
+ }
+
+ section#main chat{
+   height: 50px;
+   width: 50px;
+   }
+ 
+
+ aside {
+   background-color:Gainesboro;
+   width:450px; 
+   float:right; 
+ }
+ aside control{
+   float:left;
+   width: 220px;
+ }
+ aside graph{
+   float:right;
+   width: 210px;
+ }
+ aside control slider1{
+   float:left;
+   width: 50px;
+   }
+ aside control slider2{
+   float:left;
+   width: 50px;
+   }
+ aside control slider3{
+   float:left;
+   width: 50px;
+   }
+ aside control slider4{
+   float:left;
+   width: 50px;
+   }
+ aside graph progbar1{
+   float:top;
+   width: 60px;
+ }
+ aside graph progbar2{
+   float:top;
+   width: 60px;
+ }
+ aside graph progbar3{
+   float:top;
+   width: 60px;
+ }
+ aside graph progbar4{
+   float:top;
+   width: 60px;
+ }
+
+table {
+   font-size:1.5em;
+  }
+td {
+   line-height:15px;
+ }
+
+td textarea {
+   display:block;
+   width:15px;
+   height=10px;
+ }
+
+
+/* START NAV MENU */
+nav {
+  background-color:#2C5463; 
+  height:40px;
+}
+ 
+ 
+nav ul {
+  font-family: Arial, Verdana;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ 
+nav ul li {
+  display: block;
+  position: relative;
+  float: left;
+ 
+}
+ 
+nav li ul { 
+  display: none; 
+}
+ 
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  padding: 7px 15px 3px 15px;
+  background: #2C5463;
+  color: #ffffff;  
+  margin-left: 1px;
+  white-space: nowrap;
+  height:30px; /* Width and height of top-level nav items */
+  width:90px;
+  text-align:center;
+ 
+}
+ 
+nav ul li a:hover { 
+  background: #617F8A; 
+}
+ 
+nav li:hover ul {
+  display: block;
+  position: absolute;
+  height:30px;
+}
+ 
+nav li:hover li {
+  float: none;
+  font-size: 11px;
+ 
+}
+ 
+nav li:hover a { 
+  background: #3A464F; 
+  height:30px; /* Height of lower-level nav items is shorter than main level */
+}
+ 
+nav li:hover li a:hover { 
+  background: #95A9B1; 
+}
+ 
+nav ul li ul li a {
+    text-align:left; /* Top-level items are centered, but nested list items are left-aligned */
+}
+ 
+/* END NAV MENU */
+
+
+	</style>

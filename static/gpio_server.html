@@ -1,0 +1,283 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+      
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+<div id = "container">
+	<header>
+		<h1>RaspberryPi-GertBoard GPIO page</h1>
+	</header>
+	 <nav>
+            <ul>
+              <li><a>Contact</a>
+	      <ul>
+		    <li><a href="mailto:rjonescec@gmail.com">Email Me</a></li>
+		    <li><a href="http://www.github.com">Code Page</a></li>
+		    <li><a href="http://ronniejones.wordpress.com">Project Page</a></li>
+                </ul>
+	      </li>
+              <li><a>GetState</a>
+                <ul>
+		    <li><input id="button20" class="pin" type="text" size=6 value="Status:"/></li>
+                    <li><input id="button21" class="pin" type="text" size=6 value="Analog:"/></li>
+                    <li><input id="button22" class="pin" type="text" size=6 value="Servo:"/></li>
+                </ul>
+              </li>
+              <li><a>TogglePin</a>
+                <ul>
+                    <li><input id="button0" class="pin" type="text" size=6 value="Pin0:"/></li>
+                    <li><input id="button2" class="pin" type="text" size=6 value="Pin2:"/></li>
+                    <li><input id="button3" class="pin" type="text" size=6 value="Pin3:"/></li>
+                    <li><input id="button4" class="pin" type="text" size=6 value="Pin4:"/></li>
+		    <li><input id="button5" class="pin" type="text" size=6 value="Pin5:"/></li>
+		    <li><input id="button6" class="pin" type="text" size=6 value="Pin6:"/></li>
+		    <li><input id="button7" class="pin" type="text" size=6 value="Pin7:"/></li>
+                </ul>
+              </li>
+              <li><a>ToggleMode</a>
+                <ul>
+                    <li><input id="button8" class="pin" type="text" size=6 value="Mode2:0"/></li>
+                    <li><input id="button9" class="pin" type="text" size=6 value="Mode2:1"/></li>
+		    <li><input id="button10" class="pin" type="text" size=6 value="Mode3:0"/></li>
+                    <li><input id="button11" class="pin" type="text" size=6 value="Mode3:1"/></li>
+                    <li><input id="button12" class="pin" type="text" size=6 value="Mode4:0"/></li>
+                    <li><input id="button13" class="pin" type="text" size=6 value="Mode4:1"/></li>
+		    <li><input id="button14" class="pin" type="text" size=6 value="Mode5:0"/></li>
+                    <li><input id="button15" class="pin" type="text" size=6 value="Mode5:1"/></li>
+		    <li><input id="button16" class="pin" type="text" size=6 value="Mode6:0"/></li>
+                    <li><input id="button17" class="pin" type="text" size=6 value="Mode6:1"/></li>
+                    <li><input id="button18" class="pin" type="text" size=6 value="Mode7:0"/></li>
+                    <li><input id="button19" class="pin" type="text" size=6 value="Mode7:1"/></li>
+                </ul>
+              </li>          
+              <li><a></a>
+                
+              </li>
+            </ul>
+        </nav>
+<div id="boxes">
+	<section id="main" role="main">
+    <form action='#' id='chatform' method='get'>
+      <textarea id='chat' cols='50' rows='12'></textarea>
+      <br />
+      <label for='message'>%(username)s: </label><input type='text' id='message' />
+      <input id='send' type='submit' value='Send' />
+      </form><br><br>
+      </section>
+<aside>
+<control>
+<slider1>
+      <p>
+<label for="amount1">DAC1</label>
+<input type="text" id="amount1" size="4" style="border: 0; color: #f6931f; font-weight: bold;" />
+</p>
+<div id="slider-vertical1" style="height: 250px;"></div>
+</slider1>
+<slider2>
+ <p>
+<label for="amount2">DAC2</label>
+<input type="text" id="amount2" size="4" style="border: 0; color: #f6931f; font-weight: bold;" />
+</p>
+<div id="slider-vertical2" style="height: 250px;"></div>
+</slider2>
+<slider3>
+ <p>
+<label for="amount3">PWM1</label>
+<input type="text" id="amount3" size="4" style="border: 0; color: #f6931f; font-weight: bold;" />
+</p>
+<div id="slider-vertical3" style="height: 250px;"></div>
+</slider3>
+<slider4>
+ <p>
+<label for="amount4">Servo</label>
+<input type="text" id="amount4" size="4" style="border: 0; color: #f6931f; font-weight: bold;" />
+</p>
+<div id="slider-vertical4" style="height: 250px;"></div>
+</slider4>
+</control>
+<graph>
+<progbar1>
+<div id="progressbar"><div class="progress-label">ADC_1...</div></div>
+</progbar1>
+<progbar2>
+<div id="progressbar2"><div class="progress-label2">ADC_2...</div></div>
+</progbar2>
+<progbar3>
+<div id="progressbar3"><div class="progress-label3">PWM_1...</div></div>
+</progbar3>
+<progbar4>
+<div id="progressbar4"><div class="progress-label4">Servo...</div></div>
+</progbar4>
+</graph>
+</aside>
+<footer>
+<table>
+	<tr>
+		<td align="center">WPyPins</td>
+		<td align="center">GPIO</td>
+		<td align="center">Phys</td>
+		<td align="center">Names</td>
+		<td align="center">Mode</td>
+		<td align="center">Value</td>
+		<td></td>
+		<td></td>
+		<td align="center">WPyPins</td>
+		<td align="center">GPIO</td>
+		<td align="center">Phys</td>
+		<td align="center">Names</td>
+		<td align="center">Mode</td>
+		<td align="center">Value</td>
+		<td></td>
+		<td></td>
+		<td align="center">WPyPins</td>
+		<td align="center">GPIO</td>
+		<td align="center">Phys</td>
+		<td align="center">Names</td>
+		<td align="center">Mode</td>
+		<td align="center">Value</td>
+	</tr>
+	<tr>
+		<td align="center">0</td>
+		<td align="center">17</td>
+		<td align="center">11</td>
+		<td align="center">GPIO 0</td>
+		<td align="center"><img id="mode0" class-"stat" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin0" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">8</td>
+		<td align="center">0</td>
+		<td align="center">3</td>
+		<td align="center">SDA</td>
+		<td align="center"><img id="mode8" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin8" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">16</td>
+		<td align="center">15</td>
+		<td align="center">10</td>
+		<td align="center">RxD</td>
+		<td align="center"><img id="mode16" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin16" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">1</td>
+		<td align="center">18</td>
+		<td align="center">12</td>
+		<td align="center">GPIO 1</td>
+		<td align="center"><img id="mode1" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin1" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">9</td>
+		<td align="center">1</td>
+		<td align="center">5</td>
+		<td align="center">SCL</td>
+		<td align="center"><img id="mode9" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin9" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">2</td>
+		<td align="center">21</td>
+		<td align="center">13</td>
+		<td align="center">GPIO 2</td>
+		<td align="center"><img id="mode2" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin2" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">10</td>
+		<td align="center">8</td>
+		<td align="center">24</td>
+		<td align="center">CE0</td>
+		<td align="center"><img id="mode10" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin10" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">3</td>
+		<td align="center">22</td>
+		<td align="center">15</td>
+		<td align="center">GPIO 3</td>
+		<td align="center"><img id="mode3" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin3" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">11</td>
+		<td align="center">7</td>
+		<td align="center">26</td>
+		<td align="center">CE1</td>
+		<td align="center"><img id="mode11" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin11" src="/js/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">4</td>
+		<td align="center">23</td>
+		<td align="center">16</td>
+		<td align="center">GPIO 4</td>
+		<td align="center"><img id="mode4" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin4" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">12</td>
+		<td align="center">10</td>
+		<td align="center">19</td>
+		<td align="center">MOSI</td>
+		<td align="center"><img id="mode12" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin12" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">5</td>
+		<td align="center">24</td>
+		<td align="center">18</td>
+		<td align="center">GPIO 5</td>
+		<td align="center"><img id="mode5" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin5" src="/js/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">13</td>
+		<td align="center">9</td>
+		<td align="center">21</td>
+		<td align="center">MISO</td>
+		<td align="center"><img id="mode13" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin13" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">6</td>
+		<td align="center">25</td>
+		<td align="center">22</td>
+		<td align="center">GPIO 6</td>
+		<td align="center"><img id="mode6" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin6" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">14</td>
+		<td align="center">11</td>
+		<td align="center">23</td>
+		<td align="center">SCLK</td>
+		<td align="center"><img id="mode14" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin14" src="/img/na.gif"/></td>
+	</tr>
+	<tr>
+		<td align="center">7</td>
+		<td align="center">4</td>
+		<td align="center">7</td>
+		<td align="center">GPIO 7</td>
+		<td align="center"><img id="mode7" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin7" src="/img/na.gif"/></td>
+		<td></td>
+		<td></td>
+		<td align="center">15</td>
+		<td align="center">14</td>
+		<td align="center">8</td>
+		<td align="center">TxD</td>
+		<td align="center"><img id="mode15" src="/img/na.gif"/></td>
+		<td align="center"><img id="pin15" src="/img/na.gif"/></td>
+	</tr>
+</table>
+</footer>
+</div>
+    </body>
+    </html>
