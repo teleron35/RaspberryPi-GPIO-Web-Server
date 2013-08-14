@@ -1,3 +1,12 @@
+"""
+The following Web Server was derived from example code from ws4py.  Specifically code from the example cherrypy_echo_server.py in the ws4py code. 
+Copyright (c) 2011-2013, Sylvain Hellegouarch
+All rights reserved. 
+
+The rest of the code relies heavily on several different projects.  First the CherryPy project which ws4py runs on top of.  Also a major portion of this project depends on the work of Gordon Henderson and his WiringPi project.  The python wrapper for the WiringPi library was written by Phillip Howard.  Also, Jquery UI was used alot for the web interface.
+
+"""
+
 # -*- coding: utf-8 -*-
 import argparse
 import random
