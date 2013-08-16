@@ -36,9 +36,13 @@ wp.pullUpDnControl(6, 2) #set pullup
 #force pin 0 low and the pwm to 0 
 wp.digitalWrite(0,0)
 wp.pwmWrite(1,0)
-#setup i2c channel,  SMBus channel is zero on rev.1 raspberry pi
-bus = smbus.SMBus(0)
+#To setup smbus use the following but import smbus at the top
+#setup i2c channel,  Bus channel is zero on rev.1 raspberry pi
+#bus = smbus.SMBus(0)
 address = 0x04
+#To setup i2c with wiringpi2-python use the following code
+wbus = wp.I2C()
+i2cdev = wbus.setup(address)
 
 
 try:
@@ -130,49 +134,9 @@ class ChatWebSocketHandler(WebSocket):
 		 cherrypy.engine.publish('websocket-broadcast', TextMessage("Ana2: " + data))
 
 	 if(m.data.split(":")[0] == "Servo"):
-		 """
-		 if (m.data.split(":")[1].strip() == "1"):
-		 	bus.write_byte(address, 1)
-		 elif (m.data.split(":")[1].strip() == "10"):
-		 	bus.write_byte(address, 10)
-		 elif (m.data.split(":")[1].strip() == "20"):
-		 	bus.write_byte(address, 20)
-		 elif (m.data.split(":")[1].strip() == "30"):
-		 	bus.write_byte(address, 30)
-		 elif (m.data.split(":")[1].strip() == "40"):
-		 	bus.write_byte(address, 40)
-		 elif (m.data.split(":")[1].strip() == "50"):
-		 	bus.write_byte(address, 50)
-		 elif (m.data.split(":")[1].strip() == "60"):
-		 	bus.write_byte(address, 60)
-		 elif (m.data.split(":")[1].strip() == "70"):
-		 	bus.write_byte(address, 70)
-		 elif (m.data.split(":")[1].strip() == "80"):
-		 	bus.write_byte(address, 80)
-		 elif (m.data.split(":")[1].strip() == "90"):
-		 	bus.write_byte(address, 90)
-		 elif (m.data.split(":")[1].strip() == "100"):
-		 	bus.write_byte(address, 100)
-		 elif (m.data.split(":")[1].strip() == "110"):
-		 	bus.write_byte(address, 110)
-		 elif (m.data.split(":")[1].strip() == "120"):
-		 	bus.write_byte(address, 120)
-		 elif (m.data.split(":")[1].strip() == "130"):
-		 	bus.write_byte(address, 130)
-		 elif (m.data.split(":")[1].strip() == "140"):
-		 	bus.write_byte(address, 140)
-		 elif (m.data.split(":")[1].strip() == "150"):
-		 	bus.write_byte(address, 150)
-		 elif (m.data.split(":")[1].strip() == "160"):
-		 	bus.write_byte(address, 160)
-		 elif (m.data.split(":")[1].strip() == "170"):
-		 	bus.write_byte(address, 170)
-		 elif (m.data.split(":")[1].strip() == "180"):
-		 	bus.write_byte(address, 180)
-		 else:
-		 	pass
-		 """
-		 bus.write_byte(address, int(m.data.split(":")[1].strip()))
+		 
+		 wbus(i2cdev,  int(m.data.split(":")[1].strip())) 
+		 #bus.write_byte(address, int(m.data.split(":")[1].strip()))
 		 time.sleep(0.015)
 		 cherrypy.engine.publish('websocket-broadcast', TextMessage("Servo: " + m.data.split(":")[1].strip()))
 		
