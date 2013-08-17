@@ -1,0 +1,212 @@
+First, make sure you have the latest disto (your choice) by doing sudo apt-get update.
+
+Setting up RaspberryPi
+
+sudo apt-get install git-core
+
+sudo apt-get install python-dev
+
+git clone git://git.drogon.net/wiringPi
+
+cd wiringPi
+sudo ./build
+
+cd ..
+
+to test
+gpio -v
+sudo gpio readall
+
+sudo apt-get install python-setuptools
+
+sudo git clone https://github.com/Gadgetoid/WiringPi2-Python.git
+
+cd WiringPi2-Python
+
+sudo python setup.py install
+
+cd ..
+
+To test
+sudo python
+>> import wiringpi2 as wp
+>> wp.wiringPiSetup()
+0
+>> for i in range (0, 17):
+	if wp.digitalRead(i) == 1:
+		print "Status ", i, ": High"
+	elif wp.digitalRead(i) == 0:
+		print "Status ", i, ": Low"
+	else:
+		print "Unknown"
+
+type Ctrl-D to escape back to command line
+
+sudo apt-get install python-cherrypy3
+
+to test
+
+Copy the following code into a file in your /home/pi folder and save it as helloworld_cherrypy.py
+
+import cherrypy
+class HelloWorld(object):
+    def index(self):
+        return "Hello World!"
+    index.exposed = True
+
+cherrypy.quickstart(HelloWorld())
+
+at the command line type sudo python helloworld_cherrypy.py and the server will start and will be serving to 127.0.0.1:8080 only.  If you want to server to the local ethernet port or wlan0 then add the following line ABOVE cherrypy.quickstart line:
+
+cherrypy.config.update({'server.socket_host': 'x.x.x.x',
+                        'server.socket_port': 8080,
+                       })
+
+browse to ip_address:8080 and you should see Hello World!
+
+Ctrl-C to stop the cherrypy server
+
+make sure you are at your home directory or whereever your git clones are stored
+
+Now lets install WebSocket-for-Python
+
+git clone git@github.com:Lawouach/WebSocket-for-Python.git
+
+If this does not work, you can get the zip file from https://github.com/Lawouach/WebSocket-for-Python and unzip the file to your local folder
+
+cd WebSocket-for-Python or WebSocket-for-Python-master
+
+sudo python setup.py install
+
+To test
+
+sudo python example/echo_cherrypy_server.py --host x.x.x.x where that is you ip address of local interface.  If you drop the --host x.x.x.x it will serve locally
+
+Congrats.  Now you are ready to locate the RaspberryPi GPIO test server
+
+make sure you are in your home directory or where you keep your git clones
+
+git clone https://github.com/teleron35/RaspberryPi-GPIO-Web-Server.git
+
+cd RaspberryPi-GPIO-Web-Server
+
+You are now ready to run the server, however we do not have our gertboard hardware hooked up.  That is ok for now.
+
+sudo python gpio_test_server.py --host x.x.x.x  again same as above with the ip_address
+
+Navigate to the x.x.x.x:9000 and you should see a shiney new RaspberryPi-GPIO-Web-Server interface.  At this point you can play with menu items where you can toggle bits.  Try TogglePin/Pin0 and you should see pin 0 state change to High.  Do it again and it will go Low.  If this works you are ready to hook up the hardware.
+
+the last step is to install the arduino ide and setup the RaspberryPi to be abel to program the AtMega328 chip.
+
+sudo apt-get install arduino
+
+Standard Debian Squeeze:
+
+cd /tmp
+wget http://project-downloads.drogon.net/gertboard/avrdude_5.10-4_armel.deb
+sudo dpkg -i avrdude_5.10-4_armel.deb
+sudo chmod 4755 /usr/bin/avrdude
+
+Or Debian Raspbian:
+
+cd /tmp
+wget http://project-downloads.drogon.net/gertboard/avrdude_5.10-4_armhf.deb
+sudo dpkg -i avrdude_5.10-4_armhf.deb
+sudo chmod 4755 /usr/bin/avrdude
+
+cd /tmp
+wget http://project-downloads.drogon.net/gertboard/setup.sh
+chmod +x setup.sh
+sudo ./setup.sh
+
+The you need to make sure that you have your gertboard configured as follows, or have your AtMega328 SPI hooked up to the SPI on the RaspberryPi
+
+
+    GPIO pin 8 -> ISP pin 5 (RESET)
+    GPIO pin 9 -> ISP pin 1 (MISO)
+    GPIO pin 10 -> ISP pin 4 (MOSI)
+    GPIO pin 11 -> ISP pin 3 (SCLK)
+
+Once you are sure that you have your chip connected to the ISP correctly and your RaspberryPi is connected to your Gertboard, then run the following command.
+
+avrsetup
+
+It should end with Happy Programming.
+
+While your are setup for arduino programming, go ahead and move the RaspberryPi-GPIO-Web-Server/arduino/Sweep.ino file into your sketchbook folder under a file named Sweep.  Then open this sketch in arduino IDE.
+
+Next we need to tell the IDE which board to program and which programmer to use(remember installing avrdude for the RaspberryPi...thanks Gordon).
+
+To do this, launch the Arduino IDE and select:
+
+Tools -> Board
+
+and select either the Gertboard with ATmega328, or the Gertboard with ATmega168 options.
+
+Next select:
+
+Tools -> Programmer
+
+and select the Raspberry Pi GPIO option. You should be ready to go after that.
+
+At this point if you have the Sweep.ino file loaded and you have selected the correct board and programmer then do the following and you will load the arduino file for your servo controller
+
+File -> Upload using programmer
+
+Warning, before hooking up your Gertboard, it is best to power down.  Then get all your wiring correct, double check and go for it.
+
+From this point on, I am assuming that you are using the Gertboard or equivalent hardware, which supplys the following stuff:
+
+Buffered I/O
+SPI Bus
+I2C Bus
+Motor Controller
+AtMega328
+MCP3002 Dual Channel 10-bit ADC
+MCP4802 Dual Channel 8-bit DAC
+LEDs and buttons
+
+Here is the Gertboard hook-up
+
+Connect the following GPIO Pins
+
+GPIO Pin	Gertboard Pin	Description
+
+GP0		J25 Pin PC4	SCA I2C
+GP1		J25 Pin PC5	SCL I2C
+GP4
+GP7		J64 Pin CSnB	SPI
+GP8		J64 Pin CSnA	SPI
+GP9		J64 Pin MISO	SPI
+GP10		J64 Pin MOSI	SPI
+GP11		J64 Pin SCLK	SPI
+GP14
+GP15
+GP17		J? Pin MOTA	Motor Control
+GP18		J? Pin MOTB	Motor Control
+GP21		J3 Pin B1	Button
+GP22		J3 Pin B2	LED
+GP23		J3 Pin B3	LED
+GP24		J3 Pin B4	LED
+GP25		J3 Pin B5	LED
+
+Misc. Connections
+
+Gertboard Pin	Gertboard Pin	Description
+
+J3 Pin B6	J25 Pin PB1	LED from AtMega328
+J3 Pin B7	J25 Pin PB5	Servo Control Signal from AtMega328
+J25 Pin DA0	J25 Pin AD0	Loop Back DAC0 to ADC0 for testing
+J25 Pin DA1	J25 Pin AD1	Loop Back DAC1 to ADC1 for testing
+J? Buf7		NA		Servo Control buffered output to servo
+J19 Gnd		NA		Gnd to negative of Battery.  Should be 9VDC or Greater to work.
+J19 MOT+	NA		To posative battery lead.  Should be 9VDC up to 35VDC
+J19 MOTA	NA		To one side of motor
+J19 MOTB	NA		To other side of motor
+
+At this point move into your RaspberryPi-GPIO-Web-Server folder.
+
+cd RaspberryPi-GPIO-Web-Server
+sudo python gpio_test_server.py --host x.x.x.x
+
+And all should work fine.

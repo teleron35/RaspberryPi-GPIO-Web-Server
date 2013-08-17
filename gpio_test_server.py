@@ -1,12 +1,3 @@
-"""
-The following Web Server was derived from example code from ws4py.  Specifically code from the example cherrypy_echo_server.py in the ws4py code. 
-Copyright (c) 2011-2013, Sylvain Hellegouarch
-All rights reserved. 
-
-The rest of the code relies heavily on several different projects.  First the CherryPy project which ws4py runs on top of.  Also a major portion of this project depends on the work of Gordon Henderson and his WiringPi project.  The python wrapper for the WiringPi library was written by Phillip Howard.  Also, Jquery UI was used alot for the web interface.
-
-"""
-
 # -*- coding: utf-8 -*-
 import argparse
 import random
@@ -19,7 +10,7 @@ from ws4py.websocket import WebSocket
 from ws4py.messaging import TextMessage
 from gpio_test import labels, GPIO, Names, Phys, Mode, readPins, writePins, setMode, readAnalog, writeAnalog, chgPWM, wp
 from subprocess import check_output
-import smbus
+#import smbus
 from gpio_helper import htmlHelper
 
 #setup for wiring pi pinout
@@ -36,11 +27,11 @@ wp.pullUpDnControl(6, 2) #set pullup
 #force pin 0 low and the pwm to 0 
 wp.digitalWrite(0,0)
 wp.pwmWrite(1,0)
-#To setup smbus use the following but import smbus at the top
 #setup i2c channel,  Bus channel is zero on rev.1 raspberry pi
+#Setup i2c bus using smbus, you must import smbus at the top
 #bus = smbus.SMBus(0)
 address = 0x04
-#To setup i2c with wiringpi2-python use the following code
+#Setup i2c bus using wiringpi
 wbus = wp.I2C()
 i2cdev = wbus.setup(address)
 
@@ -134,8 +125,7 @@ class ChatWebSocketHandler(WebSocket):
 		 cherrypy.engine.publish('websocket-broadcast', TextMessage("Ana2: " + data))
 
 	 if(m.data.split(":")[0] == "Servo"):
-		 
-		 wbus(i2cdev,  int(m.data.split(":")[1].strip())) 
+		 wbus.write(i2cdev, int(m.data.split(":")[1].strip()))
 		 #bus.write_byte(address, int(m.data.split(":")[1].strip()))
 		 time.sleep(0.015)
 		 cherrypy.engine.publish('websocket-broadcast', TextMessage("Servo: " + m.data.split(":")[1].strip()))
